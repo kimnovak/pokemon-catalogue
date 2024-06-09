@@ -1,11 +1,8 @@
 import { useParams } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import * as api from '../../api';
-
-type Pokemon = {
-    name: string;
-    id: string;
-}
+import { Pokemon } from '../../types/pokemon';
+import { DetailsCard } from './DetailsCard/DetailsCard';
 
 export const PokemonDetails = () => {
   const { pokemonName } = useParams({ from: '/pokemon/$pokemonName' });
@@ -38,5 +35,9 @@ export const PokemonDetails = () => {
     return 'error';
   }
 
-  return <div>Hello {pokemonName} {pokemon.id}</div>;
+  return (
+    <div className="lg:w-3/6 mx-4 lg:mx-auto mt-4 p-4 bg-white rounded-lg shadow-lg overflow-hidden">
+      <DetailsCard pokemon={pokemon} />
+    </div>
+  );
 };
