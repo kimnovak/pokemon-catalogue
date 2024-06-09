@@ -4,6 +4,7 @@ import * as api from '../../api';
 import { Pokemon } from '../../types/pokemon';
 import { DetailsCard } from './DetailsCard/DetailsCard';
 import { LoadingSpinner } from '../../ui/LoadingSpinner/LoadingSpinner';
+import { Pagination } from '../../ui/Pagination/Pagination';
 
 export const PokemonDetails = () => {
   const { pokemonName } = useParams({ from: '/pokemon/$pokemonName' });
@@ -52,6 +53,10 @@ export const PokemonDetails = () => {
 
   return (
     <div className="lg:w-3/6 mx-4 lg:mx-auto mt-4 p-4 bg-white rounded-lg shadow-lg overflow-hidden">
+      <Pagination
+        handleNext={() => console.log('next')}
+        handlePrevious={() => console.log('previous')}
+      />
       <DetailsCard pokemon={pokemon} />
     </div>
   );
