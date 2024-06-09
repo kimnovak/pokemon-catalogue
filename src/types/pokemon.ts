@@ -25,3 +25,8 @@ export type Pokemon = {
   types: { type: { name: string } }[];
   weight: number;
 };
+
+export type PokemonCatalogueItem = {
+  name: string;
+  url: string;
+};

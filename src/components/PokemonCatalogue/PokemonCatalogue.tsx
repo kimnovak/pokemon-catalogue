@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import * as api from '../../api';
 import { useSearchQuery } from '../../hooks/useSearchQuery';
 import { LoadingSpinner } from '../../ui/LoadingSpinner/LoadingSpinner';
+import { usePokemons } from '../../providers/PokemonProvider';
 
 type PokemonCatalogueItem = {
   name: string;
@@ -10,31 +9,12 @@ type PokemonCatalogueItem = {
 };
 
 export const PokemonCatalogue = () => {
-  const [pokemons, setPokemons] = useState<PokemonCatalogueItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const { pokemons, isLoading, hasError, getPokemons } = usePokemons();
   const { results, updateQuery, searchQuery } =
     useSearchQuery<PokemonCatalogueItem>({
       dataSet: pokemons,
       criteria: 'name',
     });
-
-  const getPokemons = async () => {
-    setHasError(false);
-    setIsLoading(true);
-    try {
-      const result = await api.getPokemons();
-      setPokemons(result);
-    } catch (e) {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getPokemons();
-  }, []);
 
   if (isLoading) {
     return (
