@@ -27,7 +27,7 @@ export const useSearchQuery = <T extends Record<string, any>>({
 
   useEffect(() => {
     const filteredItems = dataSet.filter(item =>
-      item[criteria].includes(searchQuery)
+      item[criteria].toLowerCase().includes(searchQuery.toLowerCase())
     );
     setResults(filteredItems);
   }, [search, dataSet]);
