@@ -1,10 +1,11 @@
 import { Outlet } from '@tanstack/react-router';
+import { Header } from './ui/Header/Header';
 
 export const App = () => {
   return (
     <>
-      <header></header>
-      <main className="bg-background">
+      <Header />
+      <main>
         <Outlet />
       </main>
     </>
