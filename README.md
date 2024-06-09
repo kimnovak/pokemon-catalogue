@@ -28,11 +28,16 @@ To build the app from root directory run the following command:
 
 You can find the build in dist folder
 
+## Preview
+
+You can preview the app by visiting this link: [pokemon-catalogue-rho.vercel.app](https://pokemon-catalogue-rho.vercel.app/)
+
 ## Technical overview
 
 The app is written using vite react-ts starter with tailwind css and tanstack/react-router libraries
 tanstack/react-router provides file based routing, together with Vite plugin it automatically generates configuration needed all you have to do is add a new file to routes directory
 App structure is divided by type due to simplicity of the project
+Due to time limitation there are no tests covering the features, will add them in the future
 
 ## Features
 
