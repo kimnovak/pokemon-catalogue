@@ -63,7 +63,7 @@ export const PokemonCatalogue = () => {
               className="bg-white font-m my-2 rounded hover:opacity-70"
             >
               <Link to={`/pokemon/${pokemon.name}`}>
-                <div className="p-4">{pokemon.name}</div>
+                <div className="p-4 capitalize truncate">{pokemon.name}</div>
               </Link>
             </li>
           ))}

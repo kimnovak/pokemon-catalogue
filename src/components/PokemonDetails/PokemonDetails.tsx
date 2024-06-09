@@ -1,38 +1,12 @@
-import { useParams } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import * as api from '../../api';
-import { Pokemon } from '../../types/pokemon';
 import { DetailsCard } from './DetailsCard/DetailsCard';
 import { LoadingSpinner } from '../../ui/LoadingSpinner/LoadingSpinner';
 import { Pagination } from '../../ui/Pagination/Pagination';
 import { usePagination } from '../../hooks/usePagination';
+import { usePokemonDetails } from '../../hooks/usePokemonDetails';
 
 export const PokemonDetails = () => {
-  const { pokemonName } = useParams({ from: '/pokemon/$pokemonName' });
-  const [pokemon, setPokemon] = useState<Pokemon>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const { pokemon, isLoading, hasError, refetch } = usePokemonDetails();
   const { handleNext, handlePrevious } = usePagination();
-
-  const getPokemonDetails = async () => {
-    setHasError(false);
-    setIsLoading(true);
-    try {
-      const result = await api.getPokemonByName(pokemonName);
-      setPokemon(result);
-    } catch (e) {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!pokemonName) {
-      return;
-    }
-    getPokemonDetails();
-  }, [pokemonName]);
 
   if (isLoading && !pokemon) {
     return (
@@ -48,7 +22,7 @@ export const PokemonDetails = () => {
         This Pokémon is currently sleeping, try again to wake it up!
         <button
           className="bg-primary rounded text-white px-6 py-2 flex mt-2 hover:opacity-90"
-          onClick={getPokemonDetails}
+          onClick={refetch}
         >
           RETRY
         </button>

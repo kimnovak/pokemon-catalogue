@@ -10,7 +10,7 @@ export const DetailsCard: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-4 text-center">{pokemon.name}</h1>
+      <h1 className="text-3xl font-bold mb-4 text-center capitalize">{pokemon.name}</h1>
       <img
         src={pokemon.sprites.front_default}
         alt={pokemon.name}

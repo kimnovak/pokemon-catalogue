@@ -1,7 +1,8 @@
-import { FC, createContext, useContext, useEffect, useState } from 'react';
+import { FC, createContext, useContext } from 'react';
 import { ReactNode } from '@tanstack/react-router';
 import * as api from '../api';
 import { Pokemon, PokemonCatalogueItem } from '../types/pokemon';
+import { useDataFetcher } from '../hooks/useDataFetcher';
 
 type PokemonContextType = {
   pokemons: PokemonCatalogueItem[];
@@ -14,26 +15,14 @@ type PokemonContextType = {
 const PokemonContext = createContext<PokemonContextType | undefined>(undefined);
 
 export const PokemonProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [pokemons, setPokemons] = useState<PokemonCatalogueItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-
-  const getPokemons = async () => {
-    setHasError(false);
-    setIsLoading(true);
-    try {
-      const result = await api.getPokemons();
-      setPokemons(result);
-    } catch (e) {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getPokemons();
-  }, []);
+  const {
+    data: pokemons = [],
+    isLoading,
+    hasError,
+    refetch,
+  } = useDataFetcher<PokemonCatalogueItem[]>(
+    async () => await api.getPokemons()
+  );
 
   const getPokemonByName = async (name: string) => {
     const result = await api.getPokemonByName(name);
@@ -46,7 +35,7 @@ export const PokemonProvider: FC<{ children: ReactNode }> = ({ children }) => {
         pokemons,
         isLoading,
         hasError,
-        getPokemons,
+        getPokemons: refetch,
         getPokemonByName,
       }}
     >
