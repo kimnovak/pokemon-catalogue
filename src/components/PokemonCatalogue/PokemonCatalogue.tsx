@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as api from '../../api';
+import { Link } from '@tanstack/react-router';
 
 type PokemonCatalogueItem = {
   name: string;
@@ -50,7 +51,9 @@ export const PokemonCatalogue = () => {
             key={pokemon.name}
             className="bg-white font-m my-2 rounded hover:opacity-70"
           >
-            <div className="p-4">{pokemon.name}</div>
+            <Link to={`/pokemon/${pokemon.name}`}>
+              <div className="p-4">{pokemon.name}</div>
+            </Link>
           </li>
         ))}
       </ul>
