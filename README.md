@@ -6,10 +6,8 @@ Preview list of our Pokemon, filter the result by name and view additional detai
 
 Make sure you have installed:
 
-`
-node v20
-yarn
-`
+`node v20` and
+`yarn`
 
 ## Installation
 
