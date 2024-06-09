@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import * as api from '../../api';
 import { Link } from '@tanstack/react-router';
+import * as api from '../../api';
 
 type PokemonCatalogueItem = {
   name: string;
